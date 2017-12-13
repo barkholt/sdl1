@@ -553,7 +553,13 @@ static SDL_Surface *DISPMANX_SetVideoMode(_THIS, SDL_Surface *current, int width
 		Dispmanx_SurfaceFree(&_dispvars->main_surface);
 	}
 
-	DISPMANX_SurfaceSetup(width, height, pitch, bpp, 255, aspect, 3, 0, &_dispvars->main_surface);
+	int layer = 0;
+
+	const char *layer_env = SDL_getenv("SDL_DISPMANX_LAYER");
+	if (layer_env != NULL)
+		layer = strtol(layer_env, NULL, 0);
+
+	DISPMANX_SurfaceSetup(width, height, pitch, bpp, 255, aspect, 3, layer, &_dispvars->main_surface);
 
 	/* IMPORTANT: We can't do this on the Init function or the cursor init code
 	 * will try to draw the cursor before the surface is ready! */
