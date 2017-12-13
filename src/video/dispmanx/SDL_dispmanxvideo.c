@@ -559,6 +559,8 @@ static SDL_Surface *DISPMANX_SetVideoMode(_THIS, SDL_Surface *current, int width
 	if (layer_env != NULL)
 		layer = strtol(layer_env, NULL, 0);
 
+	printf("Bro, I am setting the layer to :%i\n", layer);
+
 	DISPMANX_SurfaceSetup(width, height, pitch, bpp, 255, aspect, 3, layer, &_dispvars->main_surface);
 
 	/* IMPORTANT: We can't do this on the Init function or the cursor init code
